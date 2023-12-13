@@ -1,0 +1,24 @@
+<% layout("/layouts/boilerplate") %>
+
+<h1>All Accommodations</h1>
+<% for (let place of places) { %>
+      
+    <div class="card mb-3">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="<%= place.image %>" class="card-img-top" alt="..." height="250px">
+            </div>
+            
+            <div class="col-md-8">
+                <h5 class="card-title mt-4"><a href="/accommodations/<%= place.id %>"><%= place.title %></a></h5>
+                <p class="card-text"><%= place.description %></p>
+                <p class="card-text text-muted"><%= place.location %></p>
+                <a class="btn btn-primary mb-3 mt-3" href="/accommodations/<%= place.id %>">View</a>
+            </div>
+        </div>
+        
+    </div>
+<% } %>
+
+<a class="btn btn-primary mb-3" href="/accommodations/new">ADD NEW</a>
+

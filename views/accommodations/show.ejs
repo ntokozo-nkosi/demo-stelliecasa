@@ -1,0 +1,54 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="row">
+  <div class="col-md-8 card me-4" style="height: min-content;">
+    <img src="<%= place.image %>" class="card-img-top" alt="..." height="400px">
+    <div class="card-body">
+      <h5 class="card-title"><%= place.title %></h5>
+      <p class="card-text"><%= place.location %></p>
+      <p class="card-text"><%= place.description %></p>
+    </div>
+    <div class="card-body">
+      <a href="/accommodations/<%= place.id %>/edit" class="btn btn-info">Edit</a>
+      <form action="/accommodations/<%= place.id %>?_method=DELETE" method="POST" class="d-inline">
+          <input type="submit" value="Delete" class="btn btn-danger ">
+      </form>
+    </div>
+  </div>
+  <div class="col" style="height: min-content;">
+    <div class="row">
+      <div class="card pb-2">
+        <h3 class="mt-2">Leave a review</h3>
+        <form action="/reviews/<%= place.id %>" method="POST" novalidate class="needs-validation">
+          <label for="rating" class="form-label">Rating</label>
+          <input type="range" class="form-range" name="rating" id="rating" min="1" max="5" step="1">
+
+          <label for="body" class="form-label">Your Review</label>
+          <textarea class="form-control" name="body" id="body" cols="30" rows="3" required></textarea>
+
+          <button class="btn btn-success mt-2 form-control"> Submit</button>
+        </form>
+      </div>
+      <% for (let review of place.reviews ) {%>
+      <div class="card mt-4">
+        <div class="row">
+          <div class="col-md-8">
+            <p> Rating: <%= review.rating %>/5</p>
+            <p> Review: <%= review.body %></p>
+          </div>
+          <div class="col">
+            <form action="/reviews/<%= place.id %>/<%= review.id %>?_method=DELETE" method="POST">
+              <button class="btn btn-danger">Delete</button> 
+            </form>
+          </div>
+        </div>
+      </div>
+      <% } %>
+    </div>
+  </div>
+  
+  
+  <div class="mb-2"></div>
+</div>
+
+
